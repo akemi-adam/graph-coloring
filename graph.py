@@ -143,3 +143,15 @@ def graph_to_markdown_mermaid(graph: Graph, k: int) -> str:
     return "\n".join(lines)
 
 
+def export_graph_to_markdown(graph: Graph, k: int, filename: str = "graph.md", title: str | None = None):
+    """
+    Gera um arquivo Markdown (.md) com a visualização Mermaid do grafo
+    :Author: ChatGPT
+    """
+    mermaid_md = graph_to_markdown_mermaid(graph, k)
+    with open(filename, "w", encoding="utf-8") as f:
+        if title:
+            f.write(f"# {title}\n\n")
+        f.write(mermaid_md)
+        f.write("\n")
+    return filename
