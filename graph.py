@@ -31,3 +31,16 @@ class Graph:
         :rtype: Node or None
         '''
         return self._node_index.get(label)
+
+    def is_valid(self):
+        '''
+        Verifica se a coloração do grafo é válida, fazendo uma comparação entre os nós
+        '''
+        for node in self.nodes:
+            for label in node.neighbors:
+                neighbor: Node = self.find_node(label)
+                if node.color == neighbor.color:
+                    return False
+        return True
+
+    
