@@ -108,3 +108,29 @@ class RandomPopulation(PopulationStrategy):
         return sorted(population, key=lambda x: x[1])
         
     
+def ag(graph: Graph, k: int, epochs: int):
+    '''
+    Algoritmo genético para coloração de grafos.
+    
+    :param graph: Grafo a ser colorido
+    :type graph: Graph
+    :param k: Número de cores
+    :type k: int
+    :param epochs: Número de gerações
+    :type epochs: int
+    '''
+    fitness: FitnessFunction = LessConflictFitness()
+    population_strategy: PopulationStrategy = RandomPopulation(graph, fitness)
+    population = population_strategy.start(k)
+    crossover_operator: CrossoverOperator = OrderCrossover(fitness)
+    while epochs > 0:
+        # Dá pra quebrar isso ao verificar se achou uma solução válida
+        # print(population[0])
+        parents = population[:(POPULATION_SIZE // 2)]
+        children = crossover_operator.execute(parents)
+        population += children
+        population = sorted(population, key=lambda x: x[1])
+        population = population[:POPULATION_SIZE]
+        epochs -= 1
+    return population[0][0]
+        
