@@ -50,3 +50,27 @@ class Graph:
             nodes_str += ' ' + str(node)
         return f'G:\n{nodes_str}\n'
     
+
+def random(order: int) -> Graph:
+    '''
+    Gera um grafo aleatório de order K
+    
+    :param order: Ordem do grafo
+    :type order: int
+    :return: Grafo de ordem K
+    :rtype: Graph
+    '''
+    p: float = 0.3
+    nodes = [Node(i) for i in range(order)]
+    for i in range(1, order):
+        j = randint(0, i - 1)
+        nodes[i].neighbors.add(j)
+        nodes[j].neighbors.add(i)
+    for i in range(order):
+        for j in range(i + 1, order):
+            if j not in nodes[i].neighbors and rd() < p:
+                nodes[i].neighbors.add(j)
+                nodes[j].neighbors.add(i)
+    return Graph(nodes, order)
+
+
