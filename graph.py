@@ -20,3 +20,14 @@ class Graph:
         self.nodes = nodes
         self.order = order
         self._node_index = {node.label: node for node in nodes}
+
+    def find_node(self, label: int) -> Node:
+        '''
+        Busca um nó no grafo baseado em sua label.
+        
+        :param label: Nome de referência do nó
+        :type label: int
+        :return: Vértice do grafo
+        :rtype: Node or None
+        '''
+        return self._node_index.get(label)
