@@ -93,3 +93,53 @@ def paint(graph: Graph, k: int) -> Graph:
     return color_graph
 
 
+def graph_to_markdown_mermaid(graph: Graph, k: int) -> str:
+    '''
+    Cria o código markdown do grafo com cores k
+    :Author: ChatGPT
+    '''
+    DEFAULT_COLORS = [
+        ("#bfdbfe", "#1e3a8a"),
+        ("#fecaca", "#7f1d1d"),
+        ("#bbf7d0", "#676e00"),
+        ("#fde68a", "#d28c63"),
+        ("#ddd6fe", "#4c1d95"),
+        ("#cffafe", "#39caff"),
+        ("#fde2e4", "#d58617"),
+        ("#e0f2fe", "#075985"),
+        ("#ecfeff", "#04bc3e"),
+        ("#fef3c7", "#92400e"),
+        ("#f0fdf4", "#166534"),
+        ("#f5f3ff", "#a677f2"),
+    ]
+
+    lines = []
+    lines.append("```mermaid")
+    lines.append("graph LR")
+
+    for node in graph.nodes:
+        lines.append(f"    V{node.label}(({node.label}))")
+
+    visited = set()
+    for node in graph.nodes:
+        visited.add(node.label)
+        for neighbor in node.neighbors:
+            if neighbor in visited:
+                continue
+            lines.append(f"    V{node.label} --- V{neighbor}")
+
+    for color in range(1, k + 1):
+        fill, stroke = DEFAULT_COLORS[(color - 1) % len(DEFAULT_COLORS)]
+        lines.append(
+            f"classDef cor{color} "
+            f"fill:{fill},stroke:{stroke},stroke-width:2px,color:#000"
+        )
+
+    for node in graph.nodes:
+        if node.color is not None:
+            lines.append(f"class V{node.label} cor{node.color}")
+
+    lines.append("```")
+    return "\n".join(lines)
+
+
