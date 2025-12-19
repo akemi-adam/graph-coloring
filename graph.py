@@ -44,3 +44,9 @@ class Graph:
         return True
 
     
+    def __str__(self) -> str:
+        nodes_str: str = ''
+        for node in self.nodes:
+            nodes_str += ' ' + str(node)
+        return f'G:\n{nodes_str}\n'
+    
