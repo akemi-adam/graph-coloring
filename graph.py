@@ -14,3 +14,9 @@ class Node:
     def __str__(self):
         return f'V{self.label}{(" with color " + str(self.color)) if self.color is not None else "" }: {self.neighbors}\n'
 
+
+class Graph:
+    def __init__(self, nodes: list[Node], order: int):
+        self.nodes = nodes
+        self.order = order
+        self._node_index = {node.label: node for node in nodes}
