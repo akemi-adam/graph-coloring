@@ -56,8 +56,8 @@ Para esse projeto, será utilizada a abordagem de lista de adjacência, alinhada
 
 ## To-do
 
-- [ ] Definir representação do grafo
-- [ ] Criar algoritmo para gerar um grafo G(V, E) qualquer de ordem L
-- [ ] Criar algoritmo genético (AG) para colorir esse grafo G com um número K
+- [X] Definir representação do grafo
+- [X] Criar algoritmo para gerar um grafo G(V, E) qualquer de ordem L
+- [X] Criar algoritmo genético (AG) para colorir esse grafo G com um número K
 - [ ] Criar algoritmo de colônia artificial de abelhas (ABC) para colorir esse grafo G com um número K
 - [ ] Gerar gráficos e comparar esses dois algoritmos
