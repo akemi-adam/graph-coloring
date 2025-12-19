@@ -74,3 +74,22 @@ def random(order: int) -> Graph:
     return Graph(nodes, order)
 
 
+def paint(graph: Graph, k: int) -> Graph:
+    """
+    Dado um grafo G, retorna um clone dele colorido (não garante que é válido)
+    """
+    color_graph: Graph = deepcopy(graph)
+    nodes: list[Node] = color_graph.nodes
+    n: int = len(nodes)
+    shuffle(nodes)
+    if n >= k:
+        for i in range(k):
+            nodes[i].color = i + 1
+        start = k
+    else:
+        start = 0
+    for i in range(start, n):
+        nodes[i].color = randint(1, k)
+    return color_graph
+
+
