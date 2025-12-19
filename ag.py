@@ -1,5 +1,5 @@
 from abc import ABC
-from graph import Graph
+from graph import Graph, paint
 from copy import deepcopy
 from random import sample
 from collections import Counter
@@ -84,4 +84,27 @@ class OrderCrossover(CrossoverOperator):
             node.color = color
 
         return child
+    
+
+class PopulationStrategy(ABC):
+    def __init__(self, graph: Graph, fitness: FitnessFunction):
+        self.graph = graph
+        self.fitness = fitness
+        
+    def start(self, k: int):
+        pass
+
+
+class RandomPopulation(PopulationStrategy):
+    def __init__(self, graph: Graph, fitness: FitnessFunction):
+        super().__init__(graph, fitness)
+    
+    def start(self, k: int):
+        population = []
+        while len(population) < POPULATION_SIZE:
+            graph: Graph = paint(self.graph, k)
+            individual = (graph, self.fitness.evaluate(graph))
+            population.append(individual)
+        return sorted(population, key=lambda x: x[1])
+        
     
